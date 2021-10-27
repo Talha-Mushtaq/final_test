@@ -1,0 +1,716 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IAdminRes": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"token": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id",
+					"name",
+					"email",
+					"password",
+					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAdminReqLogin": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserInfo": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IMessage": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"email",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupRes": {
+				"properties": {
+					"_id": {},
+					"name": {
+						"type": "string"
+					},
+					"users": {
+						"items": {
+							"$ref": "#/components/schemas/IUserInfo"
+						},
+						"type": "array"
+					},
+					"messages": {
+						"items": {
+							"$ref": "#/components/schemas/IMessage"
+						},
+						"type": "array"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id",
+					"name",
+					"users"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupReqSave": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"users": {
+						"$ref": "#/components/schemas/IUserInfo"
+					}
+				},
+				"required": [
+					"name",
+					"users"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupReqAddUserToGroup": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"user": {
+						"$ref": "#/components/schemas/IUserInfo"
+					}
+				},
+				"required": [
+					"_id",
+					"user"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupReqsendMessageToGroup": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"messages": {
+						"$ref": "#/components/schemas/IMessage"
+					}
+				},
+				"required": [
+					"_id",
+					"messages"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupReqcheckMessagesFromGroup": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupReqSpecificeWordSearch": {
+				"properties": {
+					"word": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"word"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IGroupReqSpecificUserWordSearch": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"word": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"word"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserRes": {
+				"properties": {
+					"_id": {},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"pictureUrl": {
+						"type": "string"
+					},
+					"token": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id",
+					"name",
+					"email",
+					"password",
+					"pictureUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserReqSave": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"pictureUrl": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"password",
+					"pictureUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserReqLogin": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserReqUpdate": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"pictureUrl": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id",
+					"name",
+					"email",
+					"password",
+					"pictureUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"api_key": {
+				"type": "apiKey",
+				"name": "chat_app_token",
+				"in": "header"
+			}
+		}
+	},
+	"info": {
+		"title": "first",
+		"version": "1.0.0",
+		"description": "orcaloSetupSkelton",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Talha Mushtaq"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/admin/loginAdmin": {
+			"post": {
+				"operationId": "LoginAdmin",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IAdminRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "Admin will login by required data first then go to protected route",
+				"summary": "Admin will login to perform actions on protected routes",
+				"tags": [
+					"Admin Routes"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "Admin email and password",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IAdminReqLogin"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/createGroup": {
+			"post": {
+				"operationId": "CreateGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "Admin will login by required data first then can create group",
+				"summary": "Admin will login throuh email and password then will give data to create group",
+				"tags": [
+					"Group Routes"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "Group name , admin id and email",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupReqSave"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/addUserToGroup": {
+			"post": {
+				"operationId": "AddUserToGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "Admin will login by required data first then can add user to secific group",
+				"summary": "Admin will login throuh email and password then will give user data to add into group",
+				"tags": [
+					"Group Routes"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "Group id , user id and  email",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupReqAddUserToGroup"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/sendMessageToGroup": {
+			"post": {
+				"operationId": "SendMessageToGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "User can send messsage to secific group",
+				"summary": "User can send messsage by specific group id",
+				"tags": [
+					"Group Routes"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "Group id , user id,email and message",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupReqsendMessageToGroup"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/checkMessagesFromGroup": {
+			"post": {
+				"operationId": "CheckMessagesFromGroup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "Admin will login by required data first then got to proected route to check all messages",
+				"summary": "Admin will login to all messages from specific group",
+				"tags": [
+					"Group Routes"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "group Id",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupReqcheckMessagesFromGroup"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/specificeWordSearch": {
+			"post": {
+				"operationId": "SpecificeWordSearch",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "Admin will login by required data first then search according to need",
+				"summary": "Admin will login to to search specific word in all group",
+				"tags": [
+					"Group Routes"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "word",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupReqSpecificeWordSearch"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/group/specificUserWordSearch": {
+			"post": {
+				"operationId": "SpecificUserWordSearch",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IGroupRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "Admin will login by required data first then search according to need",
+				"summary": "Admin will login to to search specific word of specific user in all group",
+				"tags": [
+					"Group Routes"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "user id and word",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IGroupReqSpecificUserWordSearch"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/registerUser": {
+			"post": {
+				"operationId": "RegisterDataUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUserRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "User will register by required data first then goto user protected route",
+				"summary": "User will register first to do a certains action into routes",
+				"tags": [
+					"User Routes"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "User name,email, password and pictureUrl",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserReqSave"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/loginUser": {
+			"post": {
+				"operationId": "LoginDataUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUserRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "User will login by required data first then goto cetain of protected routes",
+				"summary": "User will login to do actions",
+				"tags": [
+					"User Routes"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "User email and password",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserReqLogin"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/updateUser": {
+			"post": {
+				"operationId": "UpdateDataUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUserRes"
+								}
+							}
+						}
+					}
+				},
+				"description": "User have to login first then update profile",
+				"summary": "User can update record by its id",
+				"tags": [
+					"User Routes"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "User id,name,email,pictureUrl",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserReqUpdate"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
