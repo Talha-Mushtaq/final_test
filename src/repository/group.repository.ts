@@ -58,7 +58,7 @@ export class GroupRespository {
     let regex = new RegExp(data.word, "i");
 
     return groupModel.aggregate([
-      { $match: { "messages.id": { $eq: data.id } } },
+      // { $match: { "messages.id": { $eq: data.id } } },
       {
         $project: {
           name: 1,
@@ -67,10 +67,15 @@ export class GroupRespository {
               input: "$messages",
               as: "m",
               cond: {
-                $regexMatch: {
-                  input: "$$m.message",
-                  regex: regex,
-                },
+                $and: [
+                  { $eq: ["$$m.id", data.id] },
+                  {
+                    $regexMatch: {
+                      input: "$$m.message",
+                      regex: regex,
+                    },
+                  },
+                ],
               },
             },
           },
